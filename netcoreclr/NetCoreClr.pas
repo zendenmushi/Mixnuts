@@ -44,24 +44,9 @@ type
 
   end;
 
-procedure ListUpDotnetRuntimes(var str : TStringList);
-
 implementation
 uses
   ShellApi, Forms, System.IOUtils;
-
-{ Helper }
-procedure ListUpDotnetRuntimes(var str : TStringList);
-begin
-{
-  var temppath := TPath.GetTempPath;
-
-  var cmd := 'dotnet.exe';
-  var param := '--list-runtimes > '+temppath+'coreruntimes.txt';
-  ShellExecute( 0, 'open', PChar(cmd), PChar(param), nil, SW_SHOWNORMAL);
-  SysUtils.ExecuteProcess(
-  }
-end;
 
 { TNetCoreClr }
 
