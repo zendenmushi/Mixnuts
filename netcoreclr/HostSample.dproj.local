@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2019/10/26 01:16:26.185,=C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2019/10/26 01:17:16.970,C:\Dropbox\MaeGame\Mixnuts\netcoreclr\Unit4.pas=C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit4.pas</Transaction>
+    <Transaction>2019/10/26 01:17:16.970,C:\Dropbox\MaeGame\Mixnuts\netcoreclr\Unit4.dfm=C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit4.dfm</Transaction>
+    <Transaction>2019/10/26 01:17:35.134,C:\Dropbox\MaeGame\Mixnuts\netcoreclr\HostSample.dproj=C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Project4.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
