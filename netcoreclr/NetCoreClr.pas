@@ -42,6 +42,8 @@ type
     procedure AddAppPath(path : string);
     function CreateDelegate(AssemblyName : string; TypeName : string; MethodName : string) : TDelegate;
 
+    property Started : Boolean read FClrStarted;
+
   end;
 
 implementation
