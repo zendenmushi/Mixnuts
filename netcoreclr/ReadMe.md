@@ -1,4 +1,4 @@
-DelphiからNET Core Clrを起動してC#で作成したDLLを呼び出す
+DelphiからNET Core Clrを起動してC#で作成したDLLを呼び出すサンプル
 
 C#で作成したDLLをDelphiから呼び出したい場合は下記のような色々なケースがあります
 
