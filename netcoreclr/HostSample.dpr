@@ -2,7 +2,7 @@ program HostSample;
 
 uses
   Vcl.Forms,
-  Unit4 in 'Unit4.pas' {Form4},
+  HostMain in 'HostMain.pas' {Form4},
   NetCoreClr in 'NetCoreClr.pas';
 
 {$R *.res}

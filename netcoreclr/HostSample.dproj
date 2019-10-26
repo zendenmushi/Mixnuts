@@ -124,7 +124,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Unit4.pas">
+        <DCCReference Include="HostMain.pas">
             <Form>Form4</Form>
             <FormType>dfm</FormType>
         </DCCReference>
