@@ -1,0 +1,8 @@
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\bin\Debug\netstandard2.0\netcore_client.deps.json
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\bin\Debug\netstandard2.0\netcore_client.dll
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\bin\Debug\netstandard2.0\netcore_client.pdb
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\obj\Debug\netstandard2.0\netcore_client.csprojAssemblyReference.cache
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\obj\Debug\netstandard2.0\netcore_client.AssemblyInfoInputs.cache
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\obj\Debug\netstandard2.0\netcore_client.AssemblyInfo.cs
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\obj\Debug\netstandard2.0\netcore_client.dll
+C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\netcore_client\obj\Debug\netstandard2.0\netcore_client.pdb
