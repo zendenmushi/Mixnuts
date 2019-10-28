@@ -1,14 +1,15 @@
 DelphiからNET Core Clrを起動してC#で作成したDLLを呼び出すサンプル
+================================================================
 
 C#で作成したDLLをDelphiから呼び出したいケースは以下の2通りがあると思います
 
-(1） .NET Framework向けDLL を呼び出したい
+##(1） .NET Framework向けDLL を呼び出したい
   
   DllExportを使う方法が一番楽。ここでは紹介しない。
   
   ※はまりポイント：ホストEXEとクライアントDLLが同じフォルダに無い場合、ホストEXE.configファイルを使ってパス指定が必要。
   
-(2) .NET Core向けDLL を呼び出したい
+##(2) .NET Core向けDLL を呼び出したい
 
  参照：  https://docs.microsoft.com/ja-jp/dotnet/core/tutorials/netcore-hosting
 
