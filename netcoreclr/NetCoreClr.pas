@@ -65,9 +65,10 @@ begin
     @FCreateManagedDelegate := GetProcAddress(FClrHandle, 'coreclr_create_delegate');
     @FShutdownCoreClr := GetProcAddress(FClrHandle, 'coreclr_shutdown');
 
-    BuildTpaList(coreclrPath, '.dll');
-  end;
-end;
+    BuildTpaList(coreclrPath, '.dll');
+  end;
+
+end;
 
 procedure TNetCoreClr.AddAppPath(path: string);
 begin
@@ -94,7 +95,8 @@ begin
     FindClose(rec);
   end;
 end;
-
+
+
 procedure TNetCoreClr.Start;
    var propertyKeys : array[0..1] of PAnsiChar;
    var propertyValues : array [0..1]of PAnsiChar;
@@ -116,9 +118,12 @@ begin
                     @FHostHandle,        // Host handle
                     @FDomainId);         // AppDomain ID
 
-    FClrStarted :=  hr >= 0;
-  end;
-end;
+
+    FClrStarted :=  hr >= 0;
+
+  end;
+
+end;
 
 
 function TNetCoreClr.CreateDelegate(AssemblyName, TypeName, MethodName: string): TDelegate;
