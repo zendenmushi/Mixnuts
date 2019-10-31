@@ -46,11 +46,13 @@ begin
   if FileOpenDialog1.Execute then
   begin
     edtRuntimePath.Text := FileOpenDialog1.FileName;
-    if FileExists(edtRuntimePath.Text+'\coreclr.dll') then
+    if TNetCoreClr.IsValidRuntimePath(edtRuntimePath.Text) then
     begin
       // clr作成
       FNetCoreClr := TNetCoreClr.Create(edtRuntimePath.Text,'HostDemo');
-      // 対象DLLへのパスを追加する
+
+      // dllの検索パスをフルパスで与える。複数のdllがある場合は複数回AddAppPathすることが可能
+      // プロジェクトフォルダと同じ位置にexeを出力。そこからの相対パスでクライアント側dllの出力位置までパスを通す
       FNetCoreClr.AddAppPath(ExpandFileName('.\netcore_client\bin\Debug\netstandard2.0'));
       //clr起動
       FNetCoreClr.Start;
@@ -62,7 +64,7 @@ end;
 
 procedure TForm4.Button2Click(Sender: TObject);
 begin
-  if FNetCoreClr.Started then
+  if (FNetCoreClr <> nil) and FNetCoreClr.Started then
   begin
     // 対象DLLのアセンブリ名＋バージョン、呼び出す関数の属するクラス名、呼び出す関数名を渡して、関数ポインタを得る
     var entry := TClientEntry(FNetCoreClr.CreateDelegate('netcore_client, Version=1.0.0', 'netcore_client.Class1', 'Entry'));

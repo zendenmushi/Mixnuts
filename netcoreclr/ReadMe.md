@@ -24,5 +24,13 @@ C#で作成したDLLをDelphiから呼び出したいケースは以下の2通�
   
  以下略。あとはソースで  
  
- ホスト側はHostSample.dproj。サンプルはDelphi 10.3 Rioで作成。Win64のみテストしています。その他プラットフォーム対応の場合はLoadLibrary部分の変更が必要  
- クライアント側はnetcore_client/netcore_client.csproj。サンプルはVisualStudioCodeとNET Core3 SDKで作成。
+## VCL Sample  
+ ホスト側はHostSample.dproj。サンプルはDelphi 10.3 Rioで作成。Win64のみテストしています。  
+ クライアント側はnetcore_client/netcore_client.csproj。サンプルはVisualStudioCodeとNET Core3 SDKで作成。  (ただしターゲットはnetstandard2.0)  
+ クライアントdllはビルドで出力されたものを直接ロードしています  
+
+## FMX Sample (for macos)
+ ホスト側はHostSampleFMX.dproj。サンプルはDelphi 10.3 Rioで作成。MacOS 64bitのみテストしています。  
+ クライアント側はnetcore_client/netcore_client.csproj。サンプルはVisualStudioCodeとNET Core3 SDKで作成。  (ただしターゲットはnetstandard2.0)  
+ クライアントdllはアプリケーションバンドルのlib内にコピーされたものをロードしています (Delphiからの配置時に自動更新)  
+
