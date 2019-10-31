@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D6F925A9-E0FE-48F5-842E-7BB867EDEC41}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="HostSample.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="HostSampleFMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="HostSample">
+        <MSBuild Projects="HostSample.dproj"/>
+    </Target>
+    <Target Name="HostSample:Clean">
+        <MSBuild Projects="HostSample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HostSample:Make">
+        <MSBuild Projects="HostSample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="HostSampleFMX">
+        <MSBuild Projects="HostSampleFMX.dproj"/>
+    </Target>
+    <Target Name="HostSampleFMX:Clean">
+        <MSBuild Projects="HostSampleFMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HostSampleFMX:Make">
+        <MSBuild Projects="HostSampleFMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="HostSample;HostSampleFMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="HostSample:Clean;HostSampleFMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="HostSample:Make;HostSampleFMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

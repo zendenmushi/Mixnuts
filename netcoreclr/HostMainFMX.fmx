@@ -1,0 +1,64 @@
+object FormHostMain: TFormHostMain
+  Left = 0
+  Top = 0
+  Caption = 'HostMain'
+  ClientHeight = 234
+  ClientWidth = 523
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object CallButton: TButton
+    Enabled = False
+    Position.X = 40.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 433.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Call C#DLL'
+    OnClick = CallButtonClick
+  end
+  object StartButton: TButton
+    Position.X = 40.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 433.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'START CoreClr'
+    OnClick = StartButtonClick
+  end
+  object Label1: TLabel
+    Position.X = 32.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 329.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Select NET Core Runtimes folder'
+    TabOrder = 4
+  end
+  object RuntimeComboBox: TComboBox
+    Position.X = 40.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 433.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+  end
+  object ListBox1: TListBox
+    Position.X = 40.000000000000000000
+    Position.Y = 144.000000000000000000
+    Size.Width = 433.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 429.000000000000000000
+    Viewport.Height = 77.000000000000000000
+  end
+end

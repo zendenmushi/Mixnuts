@@ -2,39 +2,57 @@ unit NetCoreClr;
 
 interface
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Winapi.ActiveX;
+  System.SysUtils, System.Variants, System.Classes
+  {$ifdef MSWINDOWS}
+  ,Winapi.Windows
+  {$endif}
+  {$ifdef MACOS}
 
+  {$endif}
+  ;
 type
   THostHandle = Pointer;
   PHostHandle = ^THostHandle;
   TDelegate = Pointer;
   PDelegate = ^TDelegate;
-  TCoreclr_initialize_ptr = function(exePath : PAnsiChar ; appDomainFriendlyName : PAnsiChar; propertyCount : Integer; propertyKeys : PPAnsiChar; propertyValues : PPAnsiChar ; hostHandle : PHostHandle; domainId : PDWORD ) : integer; stdcall;
-  TCoreclr_shutdown_ptr = function(hostHandle : THostHandle; domainId : DWORD ) : integer; stdcall;
-  TCoreclr_shutdown_2_ptr = function(hostHandle : THostHandle; domainId : DWORD; latchedExitCode : PInteger ) : integer; stdcall;
-  TCoreclr_create_delegate_ptr = function(hostHandle : THostHandle; domainId : DWORD;  entryPointAssemblyName : PAnsiChar; entryPointTypeName : PAnsiChar; entryPointMethodName : PAnsiChar; delegate : PDelegate ) : integer; stdcall;
-  TCoreclr_execute_assembly_ptr = function(hostHandle : THostHandle; domainId : DWORD;  argc : Integer; argv : PPAnsiChar; managedAssemblyPath : PAnsiChar; exitCode : PInteger ) : integer; stdcall;
+  {$ifdef MSWINDOWS}
+  TCoreclr_initialize_ptr = function(exePath : PAnsiChar ; appDomainFriendlyName : PAnsiChar; propertyCount : Integer; propertyKeys : PPAnsiChar; propertyValues : PPAnsiChar ; hostHandle : PHostHandle; domainId : PUint32 ) : integer; stdcall;
+  TCoreclr_shutdown_ptr = function(hostHandle : THostHandle; domainId : UInt32 ) : integer; stdcall;
+  TCoreclr_shutdown_2_ptr = function(hostHandle : THostHandle; domainId : UInt32; latchedExitCode : PInteger ) : integer; stdcall;
+  TCoreclr_create_delegate_ptr = function(hostHandle : THostHandle; domainId : UInt32;  entryPointAssemblyName : PAnsiChar; entryPointTypeName : PAnsiChar; entryPointMethodName : PAnsiChar; delegate : PDelegate ) : integer; stdcall;
+  TCoreclr_execute_assembly_ptr = function(hostHandle : THostHandle; domainId : UInt32;  argc : Integer; argv : PPAnsiChar; managedAssemblyPath : PAnsiChar; exitCode : PInteger ) : integer; stdcall;
+  {$endif}
+  {$ifdef MACOS}
+  TCoreclr_initialize_ptr = function(exePath : PAnsiChar ; appDomainFriendlyName : PAnsiChar; propertyCount : Integer; propertyKeys : PPAnsiChar; propertyValues : PPAnsiChar ; hostHandle : PHostHandle; domainId : PUint32 ) : integer; cdecl;
+  TCoreclr_shutdown_ptr = function(hostHandle : THostHandle; domainId : UInt32 ) : integer; cdecl;
+  TCoreclr_shutdown_2_ptr = function(hostHandle : THostHandle; domainId : UInt32; latchedExitCode : PInteger ) : integer; cdecl;
+  TCoreclr_create_delegate_ptr = function(hostHandle : THostHandle; domainId : UInt32;  entryPointAssemblyName : PAnsiChar; entryPointTypeName : PAnsiChar; entryPointMethodName : PAnsiChar; delegate : PDelegate ) : integer; cdecl;
+  TCoreclr_execute_assembly_ptr = function(hostHandle : THostHandle; domainId : UInt32;  argc : Integer; argv : PPAnsiChar; managedAssemblyPath : PAnsiChar; exitCode : PInteger ) : integer; cdecl;
+  {$endif}
 
   TNetCoreClr = class
   private
     FClrPath : string;
     FClrHandle : THandle;
     FHostHandle : THostHandle;
-    FDomainID : DWORD;
+    FDomainID : UInt32;
     FAppDomainFriendlyName : string;
     FTpaList : string;
     FAppPaths : string;
     FClrStarted : Boolean;
-    procedure BuildTpaList(directory, extension: string);
-  protected
-
-  public
     FInitializeCoreClr : TCoreclr_initialize_ptr;
     FCreateManagedDelegate : TCoreclr_create_delegate_ptr;
     FShutdownCoreClr : TCoreclr_shutdown_ptr;
 
+    procedure BuildTpaList(directory, extension: string);
+  protected
+
+  public
+
     constructor Create(coreclrPath : string; appDomainFriendlyName : string);
     destructor  Destroy; override;
+
+    class function IsValidRuntimePath(Path : string) : Boolean;
 
     procedure Start();
     procedure ShutDown();
@@ -48,7 +66,7 @@ type
 
 implementation
 uses
-  ShellApi, Forms, System.IOUtils;
+  System.IOUtils;
 
 { TNetCoreClr }
 
@@ -57,7 +75,12 @@ begin
   FAppPaths := '';
   FClrStarted := false;
   FClrPath := coreclrPath;
+  {$ifdef MSWINDOWS}
   FClrHandle := LoadLibraryExW(PChar(coreclrPath+'\coreclr.dll'), 0, 0);
+  {$endif}
+  {$ifdef MACOS}
+  FClrHandle := LoadLibrary(PChar(coreclrPath+'/libcoreclr.dylib'));
+  {$endif}
   FAppDomainFriendlyName := appDomainFriendlyName;
   if (FClrHandle>0) then
   begin
@@ -72,7 +95,7 @@ end;
 
 procedure TNetCoreClr.AddAppPath(path: string);
 begin
-  FAppPaths := FAppPaths + path+';';
+  FAppPaths := FAppPaths + path+PathSep;
 end;
 
 procedure TNetCoreClr.BuildTpaList(directory : string; extension : string);
@@ -88,11 +111,11 @@ begin
       begin
         if (rec.Attr and faDirectory) = 0 then
         begin
-          FTpaList := FTpaList + directory+'\'+rec.Name+';';
+          FTpaList := FTpaList + directory+PathDelim+rec.Name+PathSep;
         end;
       end;
     until FindNext(rec) <> 0;
-    FindClose(rec);
+    System.SysUtils.FindClose(rec);
   end;
 end;
 
@@ -158,11 +181,22 @@ begin
 //  if (FClrHandle > 0) then FreeLibrary(FClrHandle); //CoreCLR ライブラリをアンロードしてはいけないらしい
 end;
 
+class function TNetCoreClr.IsValidRuntimePath(Path: string): Boolean;
+begin
+  {$ifdef MSWINDOWS}
+  result := FileExists(Path+'\coreclr.dll');
+  {$endif}
+  {$ifdef MACOS}
+  result := FileExists(Path+'/libcoreclr.dylib');
+  {$endif}
+
+end;
+
 procedure TNetCoreClr.ShutDown;
 begin
   if (FClrStarted) then
   begin
-     var hr := FShutdownCoreClr(FHostHandle, FDomainId);
+     {var hr := }FShutdownCoreClr(FHostHandle, FDomainId);
      FClrStarted := false;
   end;
 end;

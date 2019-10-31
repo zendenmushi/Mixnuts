@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/10/29 00:22:50.000.322,=C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit5.pas</Transaction>
+    <Transaction>2019/10/29 00:23:20.000.466,C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit5.fmx=C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\HostMainFMX.fmx</Transaction>
+    <Transaction>2019/10/29 00:23:20.000.466,C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Unit5.pas=C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\HostMainFMX.pas</Transaction>
+    <Transaction>2019/10/29 00:23:30.000.842,C:\Users\TMaeda\Documents\Embarcadero\Studio\Projects\Project4.dproj=C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\HostSampleFMX.dproj</Transaction>
+    <Transaction>2019/10/29 00:23:54.000.374,=C:\Dropbox\MaeGame\GitHub\Mixnuts\netcoreclr\NetCoreClr.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>
