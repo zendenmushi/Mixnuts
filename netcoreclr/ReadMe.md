@@ -26,11 +26,15 @@ C#で作成したDLLをDelphiから呼び出したいケースは以下の2通�
  
 ## VCL Sample  
  ホスト側はHostSample.dproj。サンプルはDelphi 10.3 Rioで作成。Win64のみテストしています。  
+ NET Coreランタイムを手動で指定する方式になっています。  
+ 
  クライアント側はnetcore_client/netcore_client.csproj。サンプルはVisualStudioCodeとNET Core3 SDKで作成。  (ただしターゲットはnetstandard2.0)  
  クライアントdllはビルドで出力されたものを直接ロードしています  
 
-## FMX Sample (for macos)
- ホスト側はHostSampleFMX.dproj。サンプルはDelphi 10.3 Rioで作成。MacOS 64bitのみテストしています。  
+## FMX Sample (for macos/win64)
+ ホスト側はHostSampleFMX.dproj。サンプルはDelphi 10.3 Rioで作成。MacOS/Win 64bitでテストしています。  
+ インストールされているNET Coreランタイムをリストアップして選択する方式になっています。  
+   
  クライアント側はnetcore_client/netcore_client.csproj。サンプルはVisualStudioCodeとNET Core3 SDKで作成。  (ただしターゲットはnetstandard2.0)  
  クライアントdllはアプリケーションバンドルのlib内にコピーされたものをロードしています (Delphiからの配置時に自動更新)  
 
