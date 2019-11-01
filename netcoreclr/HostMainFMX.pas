@@ -84,7 +84,21 @@ begin
   {$ifdef MSWINDOWS}
   var cmd := 'cmd.exe';
   var param := '/S /C "dotnet --list-runtimes > "'+appdatapath+'coreruntimes.txt""';
-  ShellExecute( 0, 'open', PChar(cmd), PChar(param), nil, SW_HIDE);
+
+  // 実行待ちが必要なのでShellExecuteExに変更
+  var ShExecInfo : TShellExecuteInfo;
+  FillMemory(@ShExecInfo, 0, sizeof(ShExecInfo));
+  with ShExecInfo do
+  begin
+    cbSize := sizeof(SHELLEXECUTEINFO);
+    fMask := SEE_MASK_NOCLOSEPROCESS;
+    lpVerb := PChar('open');
+    lpFile := PChar(cmd);
+    lpParameters := PChar(param);
+    nShow := SW_HIDE;
+  end;
+  ShellExecuteEx(@ShExecInfo);
+  WaitForSingleObject(ShExecInfo.hProcess,INFINITE);
   {$endif}
   {$ifdef MACOS}
   var cmd := 'dotnet --list-runtimes > "'+appdatapath+'coreruntimes.txt"';
