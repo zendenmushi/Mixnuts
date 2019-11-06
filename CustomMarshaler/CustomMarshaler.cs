@@ -1,17 +1,3 @@
-/*
-           DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-                   Version 2, December 2004
- 
-Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
-
-Everyone is permitted to copy and distribute verbatim or modified
-copies of this license document, and changing it is allowed as long
-as the name is changed.
- 
-           DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-  TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
- 
- 0. You just DO WHAT THE FUCK YOU WANT TO.  */
 
 // Author 2019 TMaeda  on WTFPL（Do What The Fuck You Want To Public License）
 
@@ -129,7 +115,7 @@ end;
 
 下記のようなメソッドをC#側から呼び出したい場合
 
-function sample_method(digit : integer; var msg : string) : string;
+function sample_method(digit : integer; var msg : string) : string; stdcall;
 begin
   result := IntToStr(digit*4)+msg;
 end;
