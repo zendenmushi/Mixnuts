@@ -3,7 +3,7 @@ CustomMarshaler for Delphi (Unicode)String
 
 
 ##  Delphi側では公開したいメソッドの他に以下の二つの手続きも公開してください  
-  
+```  
 // Delphiメソッドの引数へstringをC#から参照渡しするために、C#文字列からDelphi管理の文字列を作成する  
 procedure DelphiStringClone(source : string; var dest : Pointer); stdcall;  
 begin  
@@ -19,7 +19,7 @@ begin
     	PUInt32(destaddress)^ := refcount + 1; // 参照カウントを+1しておく。  
   	end;  
 end;  
-  
+```  
 // DelphiStringCloneで生成した変数の参照カウントを-1して解放する  
 // DelphiStringCloneで生成した変数が呼び出したDelphiメソッドの中で書き換わった場合、その時点で参照カウントが-1されるのでこの関数を呼び出す必要はないが  
 // その時、C#側のTDelphiStringMarshaler のCleanUpNativeData()には DelphiStringCloneで渡したポインタとは異なる値(書き換え後のstring変数のアドレス=s2)が入っているので  
