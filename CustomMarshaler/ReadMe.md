@@ -1,3 +1,7 @@
+CustomMarshaler for Delphi (Unicode)String
+==========================================
+
+
 ##  Delphi側では公開したいメソッドの他に以下の二つの手続きも公開してください  
   
 // Delphiメソッドの引数へstringをC#から参照渡しするために、C#文字列からDelphi管理の文字列を作成する  
