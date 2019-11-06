@@ -37,7 +37,7 @@ end;
   
 下記のようなメソッドをC#側から呼び出したい場合  
 ```
-function sample_method(digit : integer; var msg : string) : string;  
+function sample_method(digit : integer; var msg : string) : string;  stdcall; // x64だとstdcallは不要
 begin  
   result := IntToStr(digit*4)+msg;  
 end;  
